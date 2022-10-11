@@ -187,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 411);
+            this.ClientSize = new System.Drawing.Size(432, 198);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.cbFixed);
             this.Controls.Add(this.btnSecondColor);

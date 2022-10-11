@@ -83,6 +83,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="IniConfig.cs" />
     <Compile Include="MyButton.cs">
       <SubType>Component</SubType>
     </Compile>

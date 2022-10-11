@@ -85,6 +85,7 @@ namespace Clock
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            _form1.Close();
             _requestExit = true;
             Close();
         }

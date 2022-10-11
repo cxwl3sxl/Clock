@@ -9,6 +9,7 @@ namespace Clock
     public sealed partial class Form1 : Form
     {
         private readonly bool _moveAble;
+        private readonly IniConfig _config;
 
         #region 鼠标穿透
 
@@ -39,9 +40,28 @@ namespace Clock
 
         public Form1(bool moveAble = false)
         {
+            InitializeComponent();
+            _config = new IniConfig("setting.ini", true);
+            BorderColor = ColorTranslator.FromHtml(GetConfig(_config["ui"]["BorderColor"].Value, "#2196f3"));
+            TextColor = ColorTranslator.FromHtml(GetConfig(_config["ui"]["TextColor"].Value, "#2196f3"));
+            SecondColor = ColorTranslator.FromHtml(GetConfig(_config["ui"]["SecondColor"].Value, "#f44336"));
+            FontSize = GetConfig(_config["ui"]["FontSize"].Value, 20);
+            Width = Height = GetConfig(_config["ui"]["Width"].Value, 250);
+            var x= GetConfig(_config["ui"]["X"].Value, 0);
+            var y= GetConfig(_config["ui"]["Y"].Value, 0);
+            if (x == 0 && y == 0)
+            {
+                StartPosition = FormStartPosition.CenterScreen;
+            }
+            else
+            {
+                StartPosition = FormStartPosition.Manual;
+                Left = x;
+                Top = y;
+            }
+
             _moveAble = moveAble;
             DoubleBuffered = true;
-            InitializeComponent();
             if (moveAble)
             {
                 Opacity = 0.5;
@@ -53,7 +73,18 @@ namespace Clock
                 PierceThrough();
             }
 
-            _clockFont = new Font("微软雅黑", 20);
+            _clockFont = new Font("微软雅黑", FontSize);
+        }
+
+        string GetConfig(string value, string @default)
+        {
+            return string.IsNullOrWhiteSpace(value) ? @default : value;
+        }
+
+        int GetConfig(string value, int @default)
+        {
+            if (int.TryParse(value, out var i)) return i;
+            return @default;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -63,7 +94,6 @@ namespace Clock
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Height = Width;
             timer1.Start();
         }
 
@@ -77,7 +107,7 @@ namespace Clock
             g.Clear(_moveAble ? SystemColors.Control : BackColor);
 
             g.CompositingQuality = CompositingQuality.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;        
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
 
@@ -123,17 +153,19 @@ namespace Clock
             bufferedGraphics.Render(e.Graphics);
         }
 
-        public Color BorderColor { get; set; } = Color.DeepSkyBlue;
+        public Color BorderColor { get; set; }
 
-        public Color TextColor { get; set; } = Color.DeepSkyBlue;
+        public Color TextColor { get; set; }
 
-        public Color SecondColor { get; set; } = Color.Red;
+        public Color SecondColor { get; set; }
 
         public int FontSize
         {
             get => (int)_clockFont.Size;
             set => _clockFont = new Font("微软雅黑", value);
         }
+
+        #region 拖拽
 
         private int _lastX, _lastY;
         private bool _moving;
@@ -152,9 +184,24 @@ namespace Clock
             Top += e.Y - _lastY;
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _config["ui"]["BorderColor"].Value = ColorTranslator.ToHtml(BorderColor);
+            _config["ui"]["TextColor"].Value = ColorTranslator.ToHtml(TextColor);
+            _config["ui"]["SecondColor"].Value = ColorTranslator.ToHtml(SecondColor);
+            _config["ui"]["FontSize"].Value = $"{FontSize}";
+            _config["ui"]["Width"].Value = $"{Width}";
+            _config["ui"]["X"].Value = $"{Left}";
+            _config["ui"]["Y"].Value = $"{Top}";
+            _config.Save();
+        }
+
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             _moving = false;
         }
+
+        #endregion
+
     }
 }
