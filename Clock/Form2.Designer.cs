@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.btnBorderColor = new System.Windows.Forms.Button();
             this.btnTextColor = new System.Windows.Forms.Button();
             this.iWindowSize = new System.Windows.Forms.NumericUpDown();
@@ -36,19 +38,12 @@
             this.btnApplyFontSize = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.iFontSize = new System.Windows.Forms.NumericUpDown();
-            this.iMoveStep = new System.Windows.Forms.NumericUpDown();
             this.btnSecondColor = new System.Windows.Forms.Button();
-            this.btnRight = new Clock.MyButton();
-            this.btnDown = new Clock.MyButton();
-            this.btnLeft = new Clock.MyButton();
-            this.btnUp = new Clock.MyButton();
-            this.myButton1 = new Clock.MyButton();
-            this.myButton2 = new Clock.MyButton();
-            this.myButton3 = new Clock.MyButton();
-            this.myButton4 = new Clock.MyButton();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cbFixed = new System.Windows.Forms.CheckBox();
+            this.btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.iWindowSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFontSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iMoveStep)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBorderColor
@@ -148,24 +143,6 @@
             0,
             0});
             // 
-            // iMoveStep
-            // 
-            this.iMoveStep.Location = new System.Drawing.Point(183, 268);
-            this.iMoveStep.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.iMoveStep.Name = "iMoveStep";
-            this.iMoveStep.Size = new System.Drawing.Size(60, 21);
-            this.iMoveStep.TabIndex = 14;
-            this.iMoveStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.iMoveStep.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
             // btnSecondColor
             // 
             this.btnSecondColor.Location = new System.Drawing.Point(12, 70);
@@ -176,97 +153,44 @@
             this.btnSecondColor.UseVisualStyleBackColor = true;
             this.btnSecondColor.Click += new System.EventHandler(this.btnSecondColor_Click);
             // 
-            // btnRight
+            // notifyIcon1
             // 
-            this.btnRight.Location = new System.Drawing.Point(272, 246);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(60, 60);
-            this.btnRight.TabIndex = 13;
-            this.btnRight.Text = "右移";
-            this.btnRight.UseVisualStyleBackColor = true;
-            this.btnRight.ClickAction += new System.Action(this.btnRight_ClickAction);
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // btnDown
+            // cbFixed
             // 
-            this.btnDown.Location = new System.Drawing.Point(183, 332);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(60, 60);
-            this.btnDown.TabIndex = 12;
-            this.btnDown.Text = "下移";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.ClickAction += new System.Action(this.btnDown_ClickAction);
+            this.cbFixed.AutoSize = true;
+            this.cbFixed.Checked = true;
+            this.cbFixed.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFixed.Location = new System.Drawing.Point(14, 164);
+            this.cbFixed.Name = "cbFixed";
+            this.cbFixed.Size = new System.Drawing.Size(72, 16);
+            this.cbFixed.TabIndex = 16;
+            this.cbFixed.Text = "固定位置";
+            this.cbFixed.UseVisualStyleBackColor = true;
+            this.cbFixed.CheckedChanged += new System.EventHandler(this.cbFixed_CheckedChanged);
             // 
-            // btnLeft
+            // btnExit
             // 
-            this.btnLeft.Location = new System.Drawing.Point(83, 246);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(60, 60);
-            this.btnLeft.TabIndex = 11;
-            this.btnLeft.Text = "左移";
-            this.btnLeft.UseVisualStyleBackColor = true;
-            this.btnLeft.ClickAction += new System.Action(this.btnLeft_ClickAction);
-            // 
-            // btnUp
-            // 
-            this.btnUp.Location = new System.Drawing.Point(183, 173);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(60, 60);
-            this.btnUp.TabIndex = 10;
-            this.btnUp.Text = "上移";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.ClickAction += new System.Action(this.btnUp_ClickAction);
-            // 
-            // myButton1
-            // 
-            this.myButton1.Location = new System.Drawing.Point(83, 173);
-            this.myButton1.Name = "myButton1";
-            this.myButton1.Size = new System.Drawing.Size(60, 60);
-            this.myButton1.TabIndex = 16;
-            this.myButton1.Text = "移动\r\n左上";
-            this.myButton1.UseVisualStyleBackColor = true;
-            // 
-            // myButton2
-            // 
-            this.myButton2.Location = new System.Drawing.Point(272, 173);
-            this.myButton2.Name = "myButton2";
-            this.myButton2.Size = new System.Drawing.Size(60, 60);
-            this.myButton2.TabIndex = 17;
-            this.myButton2.Text = "移动\r\n右上";
-            this.myButton2.UseVisualStyleBackColor = true;
-            // 
-            // myButton3
-            // 
-            this.myButton3.Location = new System.Drawing.Point(83, 332);
-            this.myButton3.Name = "myButton3";
-            this.myButton3.Size = new System.Drawing.Size(60, 60);
-            this.myButton3.TabIndex = 18;
-            this.myButton3.Text = "移动\r\n左下";
-            this.myButton3.UseVisualStyleBackColor = true;
-            // 
-            // myButton4
-            // 
-            this.myButton4.Location = new System.Drawing.Point(272, 332);
-            this.myButton4.Name = "myButton4";
-            this.myButton4.Size = new System.Drawing.Size(60, 60);
-            this.myButton4.TabIndex = 19;
-            this.myButton4.Text = "移动\r\n右下";
-            this.myButton4.UseVisualStyleBackColor = true;
+            this.btnExit.Location = new System.Drawing.Point(92, 160);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(325, 23);
+            this.btnExit.TabIndex = 17;
+            this.btnExit.Text = "关闭程序";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 411);
-            this.Controls.Add(this.myButton4);
-            this.Controls.Add(this.myButton3);
-            this.Controls.Add(this.myButton2);
-            this.Controls.Add(this.myButton1);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.cbFixed);
             this.Controls.Add(this.btnSecondColor);
-            this.Controls.Add(this.iMoveStep);
-            this.Controls.Add(this.btnRight);
-            this.Controls.Add(this.btnDown);
-            this.Controls.Add(this.btnLeft);
-            this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnApplyFontSize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.iFontSize);
@@ -282,9 +206,10 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设置";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.iWindowSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFontSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iMoveStep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,15 +225,9 @@
         private System.Windows.Forms.Button btnApplyFontSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown iFontSize;
-        private MyButton btnUp;
-        private MyButton btnLeft;
-        private MyButton btnDown;
-        private MyButton btnRight;
-        private System.Windows.Forms.NumericUpDown iMoveStep;
         private System.Windows.Forms.Button btnSecondColor;
-        private MyButton myButton1;
-        private MyButton myButton2;
-        private MyButton myButton3;
-        private MyButton myButton4;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.CheckBox cbFixed;
+        private System.Windows.Forms.Button btnExit;
     }
 }
