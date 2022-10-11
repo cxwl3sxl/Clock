@@ -60,21 +60,26 @@ namespace Clock
         async void HideMe()
         {
             WindowState = FormWindowState.Minimized;
-            await Task.Delay(1000);
+            await Task.Delay(500);
             Hide();
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private async void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
+            await Task.Delay(500);
             WindowState = FormWindowState.Normal;
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_requestExit) return;
+            if (_requestExit)
+            {
+                notifyIcon1.Visible = false;
+                return;
+            }
+
             e.Cancel = true;
-            notifyIcon1.Visible = false;
             HideMe();
         }
 
