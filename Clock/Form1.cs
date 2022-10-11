@@ -76,9 +76,10 @@ namespace Clock
 
             g.Clear(_moveAble ? SystemColors.Control : BackColor);
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
             g.CompositingQuality = CompositingQuality.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;        
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
 
             g.DrawEllipse(new Pen(BorderColor, 4), 5, 5, Width - 10, Height - 10);
 
