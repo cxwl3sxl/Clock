@@ -84,11 +84,18 @@ namespace Clock
             g.DrawEllipse(new Pen(BorderColor, 4), 5, 5, Width - 10, Height - 10);
 
             var now = DateTime.Now;
-            var time = $"{now:HH:mm:ss fff}";
-            var textSize = g.MeasureString(time, _clockFont);
+            var line1 = $"{now:HH:mm:ss}";
+            var line2 = $"{now:fff}";
 
-            g.DrawString(time, _clockFont, new SolidBrush(TextColor), (Width - textSize.Width) / 2,
-                (Height - textSize.Height) / 2);
+            var textSize1 = g.MeasureString(line1, _clockFont);
+            var textSize2 = g.MeasureString(line2, _clockFont);
+
+            var centerX = Width / 2.0f;
+            var centerY = Height / 2.0f;
+
+            g.DrawString(line1, _clockFont, new SolidBrush(TextColor), (Width - textSize1.Width) / 2,
+                centerY - textSize1.Height);
+            g.DrawString(line2, _clockFont, new SolidBrush(TextColor), (Width - textSize2.Width) / 2, centerY);
 
             var p1 = new Pen(SecondColor, 2);
             p1.EndCap = LineCap.ArrowAnchor;
@@ -97,8 +104,7 @@ namespace Clock
             //获取当前秒，并转换为int型
             var i = Convert.ToInt32(now.Second);
 
-            var centerX = Width / 2;
-            var centerY = Height / 2;
+
             var r = centerX;
 
             //计算点值
