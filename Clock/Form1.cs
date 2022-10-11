@@ -49,6 +49,7 @@ namespace Clock
             }
             else
             {
+                TransparencyKey = BackColor = Color.Black;
                 PierceThrough();
             }
 
@@ -73,12 +74,10 @@ namespace Clock
                 currentContext.Allocate(e.Graphics, new Rectangle(0, 0, ClientSize.Width, ClientSize.Height));
             using var g = bufferedGraphics.Graphics;
 
-            g.Clear(_moveAble ? SystemColors.Control : Color.Black);
+            g.Clear(_moveAble ? SystemColors.Control : BackColor);
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.SmoothingMode = SmoothingMode.HighQuality;
             g.CompositingQuality = CompositingQuality.HighQuality;
-
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             g.DrawEllipse(new Pen(BorderColor, 4), 5, 5, Width - 10, Height - 10);
@@ -97,7 +96,11 @@ namespace Clock
                 centerY - textSize1.Height);
             g.DrawString(line2, _clockFont, new SolidBrush(TextColor), (Width - textSize2.Width) / 2, centerY);
 
-            var p1 = new Pen(SecondColor, 2);
+            var p1 = new Pen(SecondColor, 4);
+            p1.StartCap = LineCap.Round;
+            p1.EndCap = LineCap.Round;
+            p1.LineJoin = LineJoin.Round;
+
             p1.EndCap = LineCap.ArrowAnchor;
             p1.StartCap = LineCap.Round;
 
